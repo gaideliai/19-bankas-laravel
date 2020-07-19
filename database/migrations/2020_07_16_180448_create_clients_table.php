@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->id();            
             $table->string('name', 64);
             $table->string('surname', 64);
-            $table->integer('id_no');
+            $table->string('id_no', 11);
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use App\Account;
 
 class ClientController extends Controller
 {
@@ -24,7 +25,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $account = new Account;
+        return view('client.create', ['account' => $account]);
     }
 
     /**
@@ -35,7 +37,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client;
+        $account = new Account;
+        $client->name = $request->client_name;
+        $client->surname = $request->client_surname;
+        $client->id_no = $request->client_id_no;        
+        $client->save();
+
+        $account->account = $request->account_number;
+        $account->balance = $request->account_balance;
+        $account->client_id = $client->id;
+        $account->save();
+        return redirect()->route('client.create');
     }
 
     /**
