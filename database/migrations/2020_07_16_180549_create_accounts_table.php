@@ -15,11 +15,12 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 64);
+            $table->string('surname', 64);
+            $table->string('id_no', 11);
             $table->string('account', 20);
             $table->decimal('balance', 16, 2);
             $table->timestamps();
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

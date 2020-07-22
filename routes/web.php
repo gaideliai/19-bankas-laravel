@@ -17,18 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'clients'], function(){
-    Route::get('', 'ClientController@index')->name('client.index');
-    Route::get('create', 'ClientController@create')->name('client.create');
-    Route::post('store', 'ClientController@store')->name('client.store');
-    Route::get('edit/{client}', 'ClientController@edit')->name('client.edit');
-    Route::post('update/{client}', 'ClientController@update')->name('client.update');
-    Route::post('delete/{client}', 'ClientController@destroy')->name('client.destroy');
-    Route::get('show/{client}', 'ClientController@show')->name('client.show');
+ Route::group(['prefix' => 'accounts'], function(){
+    Route::get('', 'AccountController@index')->name('account.index');
+    Route::get('add/{account}', 'AccountController@add')->name('account.add');
+    Route::get('deduct/{account}', 'AccountController@deduct')->name('account.deduct');
+    Route::post('addFunds/{account}', 'AccountController@addFunds')->name('account.addFunds');
+    Route::post('deductFunds/{account}', 'AccountController@deductFunds')->name('account.deductFunds');
+    Route::get('create', 'AccountController@create')->name('account.create');
+    Route::post('store', 'AccountController@store')->name('account.store');
+    Route::get('edit/{account}', 'AccountController@edit')->name('account.edit');
+    Route::post('update/{account}', 'AccountController@update')->name('account.update');
+    Route::post('delete/{account}', 'AccountController@destroy')->name('account.destroy');
+    Route::get('show/{account}', 'AccountController@show')->name('account.show');
  });
- 
- 
